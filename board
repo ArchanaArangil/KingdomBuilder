@@ -1,0 +1,87 @@
+import java.util.*;
+
+
+public class Board {
+    private ArrayList<BoardPiece> listOfPieces;
+    private Board[][] board;
+    private BoardPiece b1 = new BoardPiece("YYYDDWDDDDMMYDDWDDDD MMYMMWDD7FMYMMWMDFFFYYOOWMMYFFYOOWYYYMFFY7OOWFFFFFGGOWGCGFGOGGOOWGGGGOGGOOWGGGOO"); //add by Emily // we need to insert String in this code ( will do in class 3/6/2023 ; )
+    private BoardPiece b2 = new BoardPiece("FDDMMDDYYYFFDDDMMYYYFFFFFFFMMM WWFCGGOOMMFFWWGGGOOYFYYWGOOCCCDF6YWOO6YGDDYWOOGGGGDDDWOOOGGGDDWWOOOGGG");//add by Emily
+    private BoardPiece b3 = new BoardPiece("OOOOMMGMYYOMOOFGMMMYFFOFFFGGWM DFFFD5GWMMDDDDFWGWYYDYDDDWWYGYDDYDDWFCGYYY5DWFFFGGDYWWWOOFGGDYYWOOOGGG"); //add by Emily
+    private BoardPiece b4 = new BoardPiece("GGOOOWGOOFGFOOWGOOFFGFFOWGGFFF FFOOWGMFDDYFCOWGDDDDYYOWGGMMDDYYWWWGDDDYWWGGWW1YMYWDCGWMWYYYWDDWWWWYYY"); //add by Emily
+    private BoardPiece b5 = new BoardPiece("DDYWWOOGGGDYWFFOOOGGDDWFFOO2FGWWWFGOFFFFWWWWGGGGFFWOOWGGYYDYWOYOWGYYDYWCYFW2DDYWWWYFWWWDDWWWWWWWWWW");
+    private BoardPiece b6 = new BoardPiece("GGGOOWGOOOGGGCOWGOOOGFFGOOWGGOFFYGOWF4OOFFFYYWFFWWMMYGGWWWDDYYYMGFFFDDYYCDMDFFYYWWWDDDDMYYWWWWDDDDDY");
+    private BoardPiece b7 = new BoardPiece("DDYWWOOOGG DCYWOOO3GG YYYFFFOYFF YYFFWDDYYF YGGWFFDDYY GG3FWFWDDY GGGOFFWWDD GGOOMWWWDW GMOOWWWWW WOOOWWWWWWW");
+    private BoardPiece b8 = new BoardPiece("");
+
+
+    public Board() {
+        listOfPieces = new ArrayList<BoardPiece>(); // why tf we have this? We use this for the random method, so we draw 4 random cards from a List;
+        Collections.addAll(listOfPieces, b1,b2,b3,b4,b5,b6,b7,b8); // all 8 boards are added
+
+
+       // now for creating the fat board (remember we cant do jack shi here without the random method that takes the 4 boards)
+
+
+       listofPieces = this.composeRandom(); // removes 4 elements  ( FINISH Board SHIT in class 3/6 : GOAL IS TO MAKE A [20][20] board array);
+       
+      }
+
+
+
+
+
+public ArrayList<BoardPiece> composeRandom() {
+
+
+    int randomNum = (int) (Math.random() * 8); // generate the first index for removal ( 0 - 7);
+     // we will use this var in the loop to deny any duplicate indexs from being slee
+    for (int i = 0; i < listofPieces.size(); i++) {
+        if ( randomNum == i) {   // if index is a match, remove it
+            listofPieces.remove(i);
+            i--; // idk i forogt if we needed this line or not;
+        }
+    }
+    randomNum = (int) (Math.random() * 7);   // list gets smaller, so only max index has to be inclusive of 6 not  7 ( thus we make it 7)
+
+
+    for (int i = 0; i < listofPieces.size(); i++) {
+        if ( randomNum == i) {   // if index is a match, remove it
+            listofPieces.remove(i);
+            i--; // idk i forogt if we needed this line or not;
+        }
+    }
+
+
+    randomNum = (int) (Math.random() * 6);
+
+
+    for (int i = 0; i < listofPieces.size(); i++) {
+        if ( randomNum == i) {   // if index is a match, remove it
+            listofPieces.remove(i);
+            i--; // idk i forogt if we needed this line or not;
+        }
+    }
+
+
+    randomNum = (int) (Math.random() * 5);
+
+
+    for (int i = 0; i < listofPieces.size(); i++) {
+        if ( randomNum == i) {   // if index is a match, remove it
+            listofPieces.remove(i);
+            I–; // idk i forogt if we needed this line or not;
+        }
+    }
+
+
+
+
+    // there are much better ways to do this , i just dont wanna have mutliple private vars, and im too lazy to think so we will discuss in class
+    // Code will finish removing for elements from the List, and only 4 elements will remain
+
+
+
+
+
+
+}
