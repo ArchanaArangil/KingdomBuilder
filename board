@@ -25,6 +25,32 @@ public class Board {
        listofPieces = this.composeRandom(); // removes 4 elements  ( FINISH Board SHIT in class 3/6 : GOAL IS TO MAKE A [20][20] board array);
        
       }
+      
+      
+   public void buildGraph {
+      ArrayList<KBNode> elementZeroNodes; 
+      BoardPiece elementzeroBoard =  listOfPieces.get(0);
+      for (int i = 0; i<listOfPieces.length; i++) {
+          for (int j = 0; j<listOfPieces[i].length; j++) {
+               elementZeroNodes.add(elementZeroBoard[i][j]);  // SUMMARY: added all nodes of that specific board ( in this case, we take the first board from the ListOfPieces which is of type BoardPiece and retrieve the KBNode ( after we add this into the list we created)
+          }
+        }
+        
+        int vartoStoreIndex = 0;
+        for ( int r = 0; r<10; r++) {
+            for (int c = 0; c<10; c++) {
+                
+                
+                board[r][c] = elementZeroNodes.get(i);
+                varToStoreIndex++;   // we do this so next time it can retrive the next element from the ArrayList instead of it being at zero. ( we can do this because we know the order of traversal)
+                if (varToStoreIndex == 9 ) {
+                    varToStoreIndex = 0; // lets reset so it never goes out of bounds; say we just did the function .get(9) - the index int variable would increase to 10, this would thus cause an out of bounds error the next time the loop runs
+                }
+            }
+        }
+          
+    }
+
 
 
 
