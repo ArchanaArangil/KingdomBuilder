@@ -1,0 +1,27 @@
+import java.awt.event.*;
+import javax.swing.JFrame;
+import java.awt.*;
+import javax.swing.*;
+public class KingdomBuilder  extends JFrame {
+	public static int WIDTH = 1600, HEIGHT = 960;
+	
+	
+	public KingdomBuilder(String title) {
+		super(title);
+		KBPanel panelOne = new KBPanel();
+		setSize(WIDTH, HEIGHT);
+		//setBackground(Color.green);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.add(panelOne);
+		setVisible(true);
+			
+		//Leaderboard m = new Leaderboard();
+		setSize(WIDTH, HEIGHT);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//add(m);
+		setVisible(true);
+		
+	}
+	
+	
+}
