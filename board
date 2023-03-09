@@ -30,8 +30,8 @@ public class Board {
    public void buildGraph {
       ArrayList<KBNode> elementZeroNodes; 
       BoardPiece elementzeroBoard =  listOfPieces.get(0);
-      for (int i = 0; i<listOfPieces.length; i++) {
-          for (int j = 0; j<listOfPieces[i].length; j++) {
+      for (int i = 0;  i<elementzeroBoard.length; i++) {
+          for (int j = 0; j<elementzeroBoard[i].length; j++) {
                elementZeroNodes.add(elementZeroBoard[i][j]);  // SUMMARY: added all nodes of that specific board ( in this case, we take the first board from the ListOfPieces which is of type BoardPiece and retrieve the KBNode ( after we add this into the list we created)
           }
         }
@@ -47,6 +47,14 @@ public class Board {
                     varToStoreIndex = 0; // lets reset so it never goes out of bounds; say we just did the function .get(9) - the index int variable would increase to 10, this would thus cause an out of bounds error the next time the loop runs
                 }
             }
+        }
+        
+        ArrayList<KBNode> elementOneNodes;
+        BoardPiece elementOneBoard = listOfPieces.get(1);
+        for (int i = 0; i<listOfPieces.length; i++) {
+               for (int j = 0; j<listOfPieces[i].length; j++) {
+                    elementOneNodes.add(elementOneBoard[i][j]);
+               }
         }
           
     }
