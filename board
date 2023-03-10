@@ -25,6 +25,7 @@ public class Board {
        
       }
 
+//old method for merging - can possibly delete
 public void buildGraph() {
 	ArrayList<KBNode> elementZeroNodes = new ArrayList<KBNode>();
 	
@@ -48,6 +49,28 @@ public void buildGraph() {
           }
       }
 }
+
+//updated method for merging - added by Emily 3/9/2023
+public void buildGraph2() {
+	KBNode[][][] temp = new KBNode[4][10][10]; //normally int[][] cannot int[]
+	
+	temp[0] = listofPieces.get(0).getBoard(); //KBNode[][]
+	temp[1] = listofPieces.get(1).getBoard();
+	temp[2] = listofPieces.get(2).getBoard();
+	temp[3] = listofPieces.get(3).getBoard();
+	
+	
+	for(int i = 0; i <= 1; i++) {
+		for(int j = 0; j <= 1; j++) {
+			for(int k = 0; k <= 9; k++) {
+				for(int l = 0; l <= 9; l++) {
+					largeBoard[i*10+k][j*10+l] = temp[i*2+j][k][l];
+				}
+			}
+		}
+	}
+}
+
 
 
 
