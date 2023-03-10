@@ -11,6 +11,7 @@ public class Board {
     private BoardPiece b6 = new BoardPiece("GGGOOWGOOOGGGCOWGOOOGFFGOOWGGOFFY");
     private BoardPiece b7 = new BoardPiece();
     private BoardPiece b8 = new BoardPiece();
+    public KBNode largeBoard = new KBNode(); //added by Emily 3/10/2023
 
 
     public Board() {
