@@ -7,10 +7,10 @@ import java.awt.event.*;
 import java.awt.image.*;
 import javax.imageio.*;
 
-public class KingdomBuilderTest extends JPanel{
+public class KBPanel extends JPanel{
 	private static BufferedImage board1, board2, board3, board4;
 	
-	public KingdomBuilderTest() {
+	public KBPanel() {
 		
 		try {
 			board1 = ImageIO.read(this.getClass().getResource("/Images/Board1Transparent.png"));
