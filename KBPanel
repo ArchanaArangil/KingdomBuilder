@@ -6,17 +6,25 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import javax.imageio.*;
+import java.lang.*;
+
 
 public class KBPanel extends JPanel{
-	private static BufferedImage board1, board2, board3, board4;
-	
+	private static BufferedImage board1, board2, board3, board4, board5, board6, board7, board8;
+	private BufferedImage[] boards = {board1, board2, board3, board4, board5, board6, board7, board8};
+
 	public KBPanel() {
-		
+
 		try {
-			board1 = ImageIO.read(this.getClass().getResource("/Images/Board1Transparent.png"));
-			board2 = ImageIO.read(this.getClass().getResource("/Images/Board2Transparent.png"));
-			board3 = ImageIO.read(this.getClass().getResource("/Images/Board3Transparent.png"));
-			board4 = ImageIO.read(this.getClass().getResource("/Images/Board4Transparent.png"));
+			boards[0] = ImageIO.read(this.getClass().getResource("/Images/Board1Transparent.png"));
+			boards[1] = ImageIO.read(this.getClass().getResource("/Images/Board2Transparent.png"));
+			boards[2] = ImageIO.read(this.getClass().getResource("/Images/Board3Transparent.png"));
+			boards[3]= ImageIO.read(this.getClass().getResource("/Images/Board4Transparent.png"));
+			boards[4] = ImageIO.read(this.getClass().getResource("/Images/Board5Transparent.png"));
+			boards[5] = ImageIO.read(this.getClass().getResource("/Images/Board6Transparent.png"));
+			boards[6]= ImageIO.read(this.getClass().getResource("/Images/Board7Transparent.png"));
+			boards[7] = ImageIO.read(this.getClass().getResource("/Images/Board8Transparent.png"));
+
 			
 		}catch(Exception e) { System.out.println("Can't read images"); }
 		
@@ -26,8 +34,18 @@ public class KBPanel extends JPanel{
 	
 	
 	public void paint(Graphics g) {
-		g.drawImage(board1, 0, 0, 500, 500, null);
+		ArrayList<Integer> boardsPainted = new ArrayList<Integer>();
+		int ind = 0;
 
+		while(boardsPainted.size() < 4) {
+			ind = (int)((Math.random()*7)+1);
+			if(!(boardsPainted.contains(ind)))
+				boardsPainted.add(ind);
+		}
+		
+		g.drawImage(boards[boardsPainted.get(0)], 0, 0, 500, 500, null);
+		g.drawImage(boards[boardsPainted.get(1)], 0, 500, 500, 1000, null);
+		g.drawImage(boards[boardsPainted.get(2)], 500, 0, 1000, 500, null);
+		g.drawImage(boards[boardsPainted.get(3)], 500, 500, 1000, 1000, null);
 	}
-
 }
