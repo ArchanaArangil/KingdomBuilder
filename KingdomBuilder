@@ -8,7 +8,7 @@ public class KingdomBuilder extends JFrame{
 	
 	public KingdomBuilder(String title) {
 		super(title);
-		KingdomBuilderTest panelOne = new KingdomBuilderTest();
+		KBPanel panelOne = new KBPanel();
 		setSize(WIDTH, HEIGHT);
 		setBackground(Color.white);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
