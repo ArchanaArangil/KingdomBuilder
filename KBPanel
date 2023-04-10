@@ -8,44 +8,141 @@ import java.awt.image.*;
 import javax.imageio.*;
 import java.lang.*;
 
-
-public class KBPanel extends JPanel{
+public class KBPanel extends JPanel implements MouseMotionListener, MouseListener{
+	private static BufferedImage endTurnButtonDisabled;
+	private static BufferedImage endTurnButtonEnabled;
+	private static BufferedImage useTileButtonDisabled;
+	private static BufferedImage useTileButtonEnabled;
 	private static BufferedImage board1, board2, board3, board4, board5, board6, board7, board8;
 	private BufferedImage[] boards = {board1, board2, board3, board4, board5, board6, board7, board8};
 
+
+	private static BufferedImage background;
+	private Button endTurnButton;
+	private static BufferedImage pSlot1;
+	private static BufferedImage pSlot2;
+	private static BufferedImage pSlot3;
+	private static BufferedImage pSlot4;
+	private boolean turnOver, continueClicked;
+
+
 	public KBPanel() {
-
-		try {
-			boards[0] = ImageIO.read(this.getClass().getResource("/Images/Board1Transparent.png"));
-			boards[1] = ImageIO.read(this.getClass().getResource("/Images/Board2Transparent.png"));
-			boards[2] = ImageIO.read(this.getClass().getResource("/Images/Board3Transparent.png"));
-			boards[3]= ImageIO.read(this.getClass().getResource("/Images/Board4Transparent.png"));
-			boards[4] = ImageIO.read(this.getClass().getResource("/Images/Board5Transparent.png"));
-			boards[5] = ImageIO.read(this.getClass().getResource("/Images/Board6Transparent.png"));
-			boards[6]= ImageIO.read(this.getClass().getResource("/Images/Board7Transparent.png"));
-			boards[7] = ImageIO.read(this.getClass().getResource("/Images/Board8Transparent.png"));
-
-			
-		}catch(Exception e) { System.out.println("Can't read images"); }
 		
-		repaint();
+	addMouseListener(this);
+	addMouseMotionListener(this);
+	try {
+		boards[0] = ImageIO.read(this.getClass().getResource("/Images/B1.png"));
+		boards[1] = ImageIO.read(this.getClass().getResource("/Images/B2.png"));
+		boards[2] = ImageIO.read(this.getClass().getResource("/Images/B3.png"));
+		boards[3]= ImageIO.read(this.getClass().getResource("/Images/B4.png"));
+		boards[4] = ImageIO.read(this.getClass().getResource("/Images/B5.png"));
+		boards[5] = ImageIO.read(this.getClass().getResource("/Images/B6.png"));
+		boards[6]= ImageIO.read(this.getClass().getResource("/Images/B7.png"));
+		boards[7] = ImageIO.read(this.getClass().getResource("/Images/B8.png"));
 		
+
+		
+	}catch(Exception e) { System.out.println("Can't read images"); }
+
+	
+	try {
+
+		endTurnButtonDisabled = ImageIO.read(this.getClass().getResource("/Images/EndTurnButtonDisabled.png"));
+		endTurnButtonEnabled = ImageIO.read(this.getClass().getResource("/Images/EndTurnButtonEnabled.png"));
+		useTileButtonDisabled = ImageIO.read(this.getClass().getResource("/Images/UseTileButtonDisabled.png"));
+		useTileButtonEnabled = ImageIO.read(this.getClass().getResource("/Images/UseTileButtonEnabled.png"));
+
+
+	} catch (Exception e) { System.out.println("Error"); }
+	
+	try {
+		background = ImageIO.read(this.getClass().getResource("/Images/Background.png"));
+		pSlot1 =ImageIO.read(this.getClass().getResource("/Images/Player1Slot.png"));
+		pSlot2 = ImageIO.read(this.getClass().getResource("/Images/Player2Slot.png"));
+		pSlot3 =ImageIO.read(this.getClass().getResource("/Images/Player3Slot.png"));
+		pSlot4 = ImageIO.read(this.getClass().getResource("/Images/Player4Slot.png"));
+
+	} catch (Exception e) { System.out.println("Can't read player slots and the background"); }
+
+	//button
+
+	endTurnButton = new Button(endTurnButtonDisabled, endTurnButtonEnabled);
+
+	endTurnButton.setCenterCoords(571, 870);
+
+	endTurnButton.setWidth(200);
+
+	endTurnButton.setHeight(70);
+
+	endTurnButton.setEnabled(true);
+
+	repaint();
+
 	}
-	
-	
+
 	public void paint(Graphics g) {
-		ArrayList<Integer> boardsPainted = new ArrayList<Integer>();
-		int ind = 0;
 
-		while(boardsPainted.size() < 4) {
-			ind = (int)((Math.random()*7)+1);
-			if(!(boardsPainted.contains(ind)))
-				boardsPainted.add(ind);
-		}
-		
-		g.drawImage(boards[boardsPainted.get(0)], 0, 0, 500, 500, null);
-		g.drawImage(boards[boardsPainted.get(1)], 0, 500, 500, 1000, null);
-		g.drawImage(boards[boardsPainted.get(2)], 500, 0, 1000, 500, null);
-		g.drawImage(boards[boardsPainted.get(3)], 500, 500, 1000, 1000, null);
+	
+	
+	ArrayList<Integer> boardsPainted = new ArrayList<Integer>();
+	int ind = 0;
+
+	while(boardsPainted.size() <= 4) {
+		ind = (int)((Math.random()*7)+1);
+;
+		if(!(boardsPainted.contains(ind)))
+			boardsPainted.add(ind);
 	}
+	g.drawImage(background, 0, 0, 1600, 960, null);
+	g.drawImage(pSlot1, 44, 98, 312, 238, null);
+	g.drawImage(pSlot2, 44, 587, 312, 238, null);
+	g.drawImage(pSlot3, 1255, 98, 312, 238, null);
+	g.drawImage(pSlot4, 1255, 587, 312, 238, null);
+	
+	g.drawImage(boards[boardsPainted.get(0)], 370, 120, 942, 567, null);
+	g.drawImage(boards[boardsPainted.get(1)], 770, 120, 942, 567, null);
+	g.drawImage(boards[boardsPainted.get(2)], 370, 470, 942, 567, null);
+	g.drawImage(boards[boardsPainted.get(3)], 770, 470, 942, 567, null);
+	//draw player slots
+	
+
+	
+	paintEndTurnButton(g);
+
+	}
+
+	public void paintEndTurnButton(Graphics g) {
+
+	endTurnButton.display(g);
+
+	}
+	
+	public void mouseClicked(MouseEvent e) {
+
+	}
+	public void mousePressed(MouseEvent e) {
+		int x = e.getX(), y = e.getY();
+		System.out.println("Clicked Button");
+		clickButton(x, y);
+		
+	}
+	public void mouseReleased(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) { }
+	public void mouseExited(MouseEvent e) { }
+	public void mouseDragged(MouseEvent e) { }
+	public void mouseMoved(MouseEvent e) {}
+	
+	public void clickButton(int x, int y) {
+		
+        if (endTurnButton.isClicked(x, y)) {
+            endTurnButton.setEnabled(false);
+            turnOver = true;
+            continueClicked = true;
+
+            paintEndTurnButton(getGraphics());
+            repaint();
+        }
+    }
+	
+	
 }
