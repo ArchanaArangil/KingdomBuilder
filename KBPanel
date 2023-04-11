@@ -15,6 +15,8 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	private static BufferedImage useTileButtonEnabled;
 	private static BufferedImage board1, board2, board3, board4, board5, board6, board7, board8;
 	private BufferedImage[] boards = {board1, board2, board3, board4, board5, board6, board7, board8};
+	private ArrayList<Integer> boardsPainted = new ArrayList<Integer>();
+
 
 
 	private static BufferedImage background;
@@ -75,24 +77,27 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	endTurnButton.setHeight(70);
 
 	endTurnButton.setEnabled(true);
+	
+	randomizeBoards();
 
 	repaint();
 
 	}
+	public void randomizeBoards() {
+		int ind = 0;
+
+		while(boardsPainted.size() <= 4) {
+			ind = (int)((Math.random()*7)+1);
+
+			if(!(boardsPainted.contains(ind)))
+				boardsPainted.add(ind);
+		}
+	}
+	
 
 	public void paint(Graphics g) {
 
 	
-	
-	ArrayList<Integer> boardsPainted = new ArrayList<Integer>();
-	int ind = 0;
-
-	while(boardsPainted.size() <= 4) {
-		ind = (int)((Math.random()*7)+1);
-;
-		if(!(boardsPainted.contains(ind)))
-			boardsPainted.add(ind);
-	}
 	g.drawImage(background, 0, 0, 1600, 960, null);
 	g.drawImage(pSlot1, 44, 98, 312, 238, null);
 	g.drawImage(pSlot2, 44, 587, 312, 238, null);
