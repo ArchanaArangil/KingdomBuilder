@@ -60,4 +60,4 @@ public class Button {
 		g.drawImage(button2, x, y, width, height, null);
 	}
 }
-Footer
+
