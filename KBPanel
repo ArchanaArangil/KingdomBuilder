@@ -15,9 +15,11 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	private static BufferedImage useTileButtonEnabled;
 	private static BufferedImage board1, board2, board3, board4, board5, board6, board7, board8;
 	private BufferedImage[] boards = {board1, board2, board3, board4, board5, board6, board7, board8};
+	private static ObjectiveCard[] objCards;
+	private ArrayList<ObjectiveCard> objCardsChosen = new ArrayList<ObjectiveCard>();
 	private ArrayList<Integer> boardsPainted = new ArrayList<Integer>();
-
-
+	
+	private int playerTurn;
 
 	private static BufferedImage background;
 	private Button endTurnButton;
@@ -65,9 +67,21 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 		pSlot4 = ImageIO.read(this.getClass().getResource("/Images/Player4Slot.png"));
 
 	} catch (Exception e) { System.out.println("Can't read player slots and the background"); }
+	
+	objCards = new ObjectiveCard[10];
+	try {
+		objCards[0] = new ObjectiveCard("Citizen", ImageIO.read(this.getClass().getResource("/Images/CitizenCard.png")));
+		objCards[1] = new ObjectiveCard("Discoverer", ImageIO.read(this.getClass().getResource("/Images/DiscovererCard.png")));
+		objCards[2] = new ObjectiveCard("Farmer", ImageIO.read(this.getClass().getResource("/Images/FarmerCard.png")));
+		objCards[3] = new ObjectiveCard("Fishermen", ImageIO.read(this.getClass().getResource("/Images/FishermenCard.png")));
+		objCards[4] = new ObjectiveCard("Hermit", ImageIO.read(this.getClass().getResource("/Images/HermitCard.png")));
+		objCards[5] = new ObjectiveCard("Knight", ImageIO.read(this.getClass().getResource("/Images/KnightCard.png")));
+		objCards[6] = new ObjectiveCard("Lord", ImageIO.read(this.getClass().getResource("/Images/LordCard.png")));
+		objCards[7] = new ObjectiveCard("Merchant", ImageIO.read(this.getClass().getResource("/Images/MerchantCard.png")));
+		objCards[8] = new ObjectiveCard("Miner", ImageIO.read(this.getClass().getResource("/Images/MinerCard.png")));
+		objCards[9] = new ObjectiveCard("Worker", ImageIO.read(this.getClass().getResource("/Images/WorkerCard.png")));
 
-	//button
-
+	} catch(Exception e) {System.out.println("Can't read objective cards");}
 	endTurnButton = new Button(endTurnButtonDisabled, endTurnButtonEnabled);
 
 	endTurnButton.setCenterCoords(571, 870);
@@ -79,10 +93,11 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	endTurnButton.setEnabled(true);
 	
 	randomizeBoards();
-
+	pickObjCards();
 	repaint();
 
 	}
+	
 	public void randomizeBoards() {
 		int ind = 0;
 
@@ -92,13 +107,23 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 			if(!(boardsPainted.contains(ind)))
 				boardsPainted.add(ind);
 		}
-	}
+	} 
 	
+	public void pickObjCards() {
+		int ind = 0;
+
+		while(objCardsChosen.size() <= 3) {
+			ind = (int)((Math.random()*9)+1);
+
+			if(!(objCardsChosen.contains(objCards[ind])))
+				objCardsChosen.add(objCards[ind]);
+		}
+	} 
 
 	public void paint(Graphics g) {
 
 	
-	g.drawImage(background, 0, 0, 1600, 960, null);
+	g.drawImage(background, 0, 0, 2000, 1500, null);
 	g.drawImage(pSlot1, 44, 98, 312, 238, null);
 	g.drawImage(pSlot2, 44, 587, 312, 238, null);
 	g.drawImage(pSlot3, 1255, 98, 312, 238, null);
@@ -110,6 +135,9 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	g.drawImage(boards[boardsPainted.get(3)], 770, 470, 942, 567, null);
 	//draw player slots
 	
+	g.drawImage(objCardsChosen.get(0).display(), 10, 350, 130, 200, null);
+	g.drawImage(objCardsChosen.get(1).display(), 135, 350, 130, 200, null);
+	g.drawImage(objCardsChosen.get(2).display(), 265, 350, 130, 200, null);
 
 	
 	paintEndTurnButton(g);
