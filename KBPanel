@@ -18,6 +18,8 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	private static ObjectiveCard[] objCards;
 	private ArrayList<ObjectiveCard> objCardsChosen = new ArrayList<ObjectiveCard>();
 	private ArrayList<Integer> boardsPainted = new ArrayList<Integer>();
+	private ArrayList <Polygon> hexCoords = new ArrayList <Polygon>();
+
 	
 	private int playerTurn;
 
@@ -119,6 +121,30 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 				objCardsChosen.add(objCards[ind]);
 		}
 	} 
+	
+	public void getHexCoords() {
+		int[]x = new int[6], y = new int[6];
+		for(int i= 0; i < 20; i++) {
+			for(int j = 0; j < 20; j++) {
+				x[0] = 403 + j*40 + (i%2 * 20);
+				x[1] = 423 + j*40 + (i%2 * 20);
+				x[2] = 443 + j*40 + (i%2 * 20);
+				x[3] = 443 + j*40 + (i%2 * 20);
+				x[4] = 423 + j*40 + (i%2 * 20);
+				x[5] = 403 + j*40 + (i%2 * 20);
+				
+				y[0] = 165 + i*35;
+				y[1] = 155 + i*35;
+				y[2] = 165 + i*35;
+				y[3] = 189 + i*35;
+				y[4] = 200 + i*35;
+				y[5] = 189 + i*35;
+				
+				hexCoords.add(new Polygon(x, y, 6 ));
+			}
+			
+		}
+	}
 
 	public void paint(Graphics g) {
 
@@ -140,6 +166,13 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	g.drawImage(objCardsChosen.get(2).display(), 265, 350, 130, 200, null);
 
 	
+	//testing hex coords
+	getHexCoords();
+	g.setColor(Color.RED);
+	for(int i = 0; i < hexCoords.size(); i++) {
+		g.drawPolygon((hexCoords.get(i)).xpoints, (hexCoords.get(i)).ypoints, 6);
+	
+	}
 	paintEndTurnButton(g);
 
 	}
@@ -155,7 +188,7 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	}
 	public void mousePressed(MouseEvent e) {
 		int x = e.getX(), y = e.getY();
-		System.out.println("Clicked Button");
+		System.out.println(x +", " + y);
 		clickButton(x, y);
 		
 	}
