@@ -1,0 +1,31 @@
+import java.awt.*;
+public class KBNode {
+	private int[] x;
+	private int[] y;
+	private Polygon hex;
+	private String settlementOccupying;
+	
+	public KBNode(int[] xC, int[]yC, int n) {
+		this.x = xC;
+		this.y = yC;
+		hex = new Polygon(this.x, this.y, n);
+	}
+	
+	public String getSettlement() {
+		return settlementOccupying;
+	}
+	
+	public void setSettlement(String s) {
+		settlementOccupying = s;
+	}
+	
+	public int[] getXCoords() {
+		return x;
+	}
+	
+	public int[] getYCoords() {
+		return y;
+	}
+
+	
+}
