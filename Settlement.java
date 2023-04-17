@@ -15,9 +15,9 @@ import javax.swing.border.*;
 
 public class Settlement {
 
-            public static final int WIDTH = 0;
+            public static final int WIDTH = 45;
 
-            public static final int HEIGHT = 0;
+            public static final int HEIGHT = 48;
 
             private int settlementIndex = 0;
 
