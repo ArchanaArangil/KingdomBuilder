@@ -126,7 +126,7 @@ public class Settlement {
 
                                    g.fillRect(x - border, y - border, width + 2 * border, height + 2 * border);
 
-                        } g.drawImage(getImage(), 20, 20, 20, 20, null);
+                        } g.drawImage(getImage(), x, y, width, height, null);
             }
 
             public String toString() {
