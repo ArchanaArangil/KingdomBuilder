@@ -1,129 +1,64 @@
 import java.util.*;
 
+
 public class Board {
-    private ArrayList<BoardPiece> listofPieces;
-    private KBNode[][] board;
-    private BoardPiece b1 = new BoardPiece("YYYDDWDDDDMMYDDWDDDDMMYMMWDD7FMYMMWMDFFFYYOOWMMYFFYOOWYYYMFFY7OOWFFFFFGGOWGCGFGOGGOOWGGGGOGGOOWGGGOO");
-    private BoardPiece b2 = new BoardPiece("FDDMMDDYYYFFDDDMMYYYFFFFFFFMMMWWFCGGOOMMFFWWGGGOOYFYYWGOOCCCDF6YWOO6YGDDYWOOGGGGDDDWOOOGGGDDWWOOOGGG");
-    private BoardPiece b3 = new BoardPiece("OOOOMMGMYYOMOOFGMMMYFFOFFFGGWMDFFFD5GWMMDDDDFWGWYYDYDDDWWYGYDDYDDWFCGYYY5DWFFFGGDYWWWOOFGGDYYWOOOGGG"); 
-    private BoardPiece b4 = new BoardPiece("GGOOOWGOOFGFOOWGOOFFGFFOWGGFFFFFOOWGMFDDYFCOWGDDDDYYOWGGMMDDYYWWWGDDDYWWGGWW1YMYWDCGWMWYYYWDDWWWWYYY"); 
+    private ArrayList<BoardPiece> listOfPieces;
+    private ArrayList<BoardPiece> piecesChosen;
+    private KBNode[][] bigBoard;
+    private BoardPiece b1 = new BoardPiece("YYYDDWDDDDMMYDDWDDDDMMYMMWDD7FMYMMWMDFFFYYOOWMMYFFYOOWYYYMFFY7OOWFFFFFGGOWGCGFGOGGOOWGGGGOGGOOWGGGOO"); //add by Emily // we need to insert String in this code ( will do in class 3/6/2023 ; )
+    private BoardPiece b2 = new BoardPiece("FDDMMDDYYYFFDDDMMYYYFFFFFFFMMMWWFCGGOOMMFFWWGGGOOYFYYWGOOCCCDF6YWOO6YGDDYWOOGGGGDDDWOOOGGGDDWWOOOGGG");//add by Emily
+    private BoardPiece b3 = new BoardPiece("OOOOMMGMYYOMOOFGMMMYFFOFFFGGWMDFFFD5GWMMDDDDFWGWYYDYDDDWWYGYDDYDDWFCGYYY5DWFFFGGDYWWWOOFGGDYYWOOOGGG"); //add by Emily
+    private BoardPiece b4 = new BoardPiece("GGOOOWGOOFGFOOWGOOFFGFFOWGGFFFFFOOWGMFDDYFCOWGDDDDYYOWGGMMDDYYWWWGDDDYWWGGWW1YMYWDCGWMWYYYWDDWWWWYYY"); //add by Emily
     private BoardPiece b5 = new BoardPiece("DDYWWOOGGGDYWFFOOOGGDDWFFOO2FGWWWFGOFFFFWWWWGGGGFFWOOWGGYYDYWOYOWGYYDYWCYFW2DDYWWWYFWWWDDWWWWWWWWWW");
-    private BoardPiece b6 = new BoardPiece("GGGOOWGOOOGGGCOWGOOOGFFGOOWGGOFFY");
-    private BoardPiece b7 = new BoardPiece();
-    private BoardPiece b8 = new BoardPiece();
-    public KBNode largeBoard = new KBNode(); //added by Emily 3/10/2023
+    private BoardPiece b6 = new BoardPiece("GGGOOWGOOOGGGCOWGOOOGFFGOOWGGOFFYGOWF4OOFFFYYWFFWWMMYGGWWWDDYYYMGFFFDDYYCDMDFFYYWWWDDDDMYYWWWWDDDDDY");
+    private BoardPiece b7 = new BoardPiece("DDYWWOOOGGDCYWOOO3GGYYYFFFOYFFYYFFWDDYYFYGGWFFDDYYGG3FWFWDDYGGGOFFWWDDGGOOMWWWDWGMOOWWWWWWOOOWWWWWWW");
+    private BoardPiece b8 = new BoardPiece("YDDDDDDDDDYYYDDDDDYDMMMDMMCDDYYMMMMMFFYYYYYMMWFFFYGYYYMFFWOYGG1OFFWFFOGGOOFFG1OOGGGOOWGGOOGGGOWGGOOO");
 
 
     public Board() {
-        listofPieces = new ArrayList<BoardPiece>(); // why tf we have this? We use this for the random method, so we draw 4 random cards from a List;
-        Collections.addAll(listofPieces, b1,b2,b3,b4,b5,b6,b7,b8); // all 8 boards are added
-
-
-       // now for creating the fat board (remember we cant do jack shi here without the random method that takes the 4 boards)
-
-
-       listofPieces = this.composeRandom(); // removes 4 elements  ( FINISH Board SHIT in class 3/6 : GOAL IS TO MAKE A [20][20] board array);
+        listOfPieces = new ArrayList<BoardPiece>(); // why tf we have this? We use this for the random method, so we draw 4 random cards from a List;
+        Collections.addAll(listOfPieces, b1,b2,b3,b4,b5,b6,b7,b8); // all 8 boards are added
+        
        
       }
-
-//old method for merging - can possibly delete
-public void buildGraph() {
-	ArrayList<KBNode> elementZeroNodes = new ArrayList<KBNode>();
-	
-    BoardPiece elementZeroBoard =  listofPieces.get(0);
     
-    for (int i = 0; i < elementZeroBoard.getBoard().length; i++) {
-        for (int j = 0; j < elementZeroBoard.getBoard()[i].length; j++) {
-             elementZeroNodes.add(elementZeroBoard.getBoard()[i][j]);  // SUMMARY: added all nodes of that specific board ( in this case, we take the first board from the ListOfPieces which is of type BoardPiece and retrieve the KBNode ( after we add this into the list we created)
-        }
-     }
-      
-      int vartoStoreIndex = 0;
-      for ( int r = 0; r<10; r++) {
-          for (int c = 0; c<10; c++) {
-              
-              board[r][c] = elementZeroNodes.get(vartoStoreIndex);
-              vartoStoreIndex++;   // we do this so next time it can retrive the next element from the ArrayList instead of it being at zero. ( we can do this because we know the order of traversal)
-              if (vartoStoreIndex == 9 ) {
-                  vartoStoreIndex = 0; // lets reset so it never goes out of bounds; say we just did the function .get(9) - the index int variable would increase to 10, this would thus cause an out of bounds error the next time the loop runs
-              }
-          }
-      }
-}
+	public void choosePieces() {
+		int ind = 0;
 
-//updated method for merging - added by Emily 3/9/2023
-public void buildGraph2() {
-	KBNode[][][] temp = new KBNode[4][10][10]; //normally int[][] cannot int[]
-	
-	temp[0] = listofPieces.get(0).getBoard(); //KBNode[][]
-	temp[1] = listofPieces.get(1).getBoard();
-	temp[2] = listofPieces.get(2).getBoard();
-	temp[3] = listofPieces.get(3).getBoard();
-	
-	
-	for(int i = 0; i <= 1; i++) {
-		for(int j = 0; j <= 1; j++) {
-			for(int k = 0; k <= 9; k++) {
-				for(int l = 0; l <= 9; l++) {
-					largeBoard[i*10+k][j*10+l] = temp[i*2+j][k][l];
-				}
-			}
+		while(piecesChosen.size() <= 4) {
+			ind = (int)((Math.random()*7)+1);
+
+			if(!(piecesChosen.contains(listOfPieces.get(ind))))
+				piecesChosen.add(listOfPieces.get(ind));
 		}
-	}
-}
-
-
-
-
-public ArrayList<BoardPiece> composeRandom() {
-
-
-    int randomNum = (int) (Math.random() * 8); // generate the first index for removal ( 0 - 7);
-     // we will use this var in the loop to deny any duplicate indexs from being slee
-    for (int i = 0; i < listofPieces.size(); i++) {
-        if ( randomNum == i) {   // if index is a match, remove it
-            listofPieces.remove(i);
-            i--; // idk i forogt if we needed this line or not;
-        }
+	} 
+      
+    public void buildGraph2() {
+    	choosePieces();
+    	KBNode[][][] temp = new KBNode[4][10][10]; //normally int[][] cannot int[]
+    	
+    	temp[0] = listOfPieces.get(0).getHexes(); //KBNode[][]
+    	temp[1] = listOfPieces.get(1).getHexes();
+    	temp[2] = listOfPieces.get(2).getHexes();
+    	temp[3] = listOfPieces.get(3).getHexes();
+    	
+    	
+    	for(int i = 0; i <= 1; i++) {
+    		for(int j = 0; j <= 1; j++) {
+    			for(int k = 0; k <= 9; k++) {
+    				for(int l = 0; l <= 9; l++) {
+    					bigBoard[i*10+k][j*10+l] = temp[i*2+j][k][l];
+    				}
+    			}
+    		}
+    	}
     }
-    randomNum = (int) (Math.random() * 7);   // list gets smaller, so only max index has to be inclusive of 6 not  7 ( thus we make it 7)
-
-
-    for (int i = 0; i < listofPieces.size(); i++) {
-        if ( randomNum == i) {   // if index is a match, remove it
-            listofPieces.remove(i);
-            i--; // idk i forogt if we needed this line or not;
-        }
-    }
-
-
-    randomNum = (int) (Math.random() * 6);
-
-
-    for (int i = 0; i < listofPieces.size(); i++) {
-        if ( randomNum == i) {   // if index is a match, remove it
-            listofPieces.remove(i);
-            i--; // idk i forogt if we needed this line or not;
-        }
-    }
-
-
-    randomNum = (int) (Math.random() * 5);
-
-
-    for (int i = 0; i < listofPieces.size(); i++) {
-        if ( randomNum == i) {   // if index is a match, remove it
-            listofPieces.remove(i);
-            i--; // idk i forogt if we needed this line or not;
-        }
-    }
-
-
-    // there are much better ways to do this , i just dont wanna have mutliple private vars, and im too lazy to think so we will discuss in class
-    // Code will finish removing for elements from the List, and only 4 elements will remain
     
-    return null; //needs to change
+    public KBNode[][] getBoardNodes(){
+    	return bigBoard;
+    }
+    
+    
 
-	}
+
 }
-
