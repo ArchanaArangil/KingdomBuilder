@@ -20,6 +20,8 @@ public class TerrainCards {
     			 terrainDeck[i*5+j] = terrainTypes[i];         
     		 }
     	 }
+    	 
+    	 terrainDeck = randomizeDeck();
      }
      
      public BufferedImage getImage(String strOfTerrainType) {
@@ -37,24 +39,33 @@ public class TerrainCards {
     	 return image;
      }
      
-     public String[] getTerrainCardDeck() { // Can use in the Player Class, to deal with everything manually from there
-    	 return terrainDeck;
-     }
-     
-     public String[] randomizeDeck() {
-    	 ArrayList<String> tempDeck = new ArrayList<String>();
-    	 for (int i = 0; i< terrainTypes.length; i++) {
-    		 
-    		 
-    		 
-    	 }
-     }
-     
-     public String getFirstCard {
+     public String[] getTerrainCardDeck(String[] shuffledArray ) {
+		
+    	 			return shuffledArray;
+		 // Can use in the Player Class, to deal with everything manually from there
     	 
      }
+     
+     public String[] randomizeDeck() { // converts the orginial Array into ArrayList so we can use the Collections.shuffle; then shuffled Array is returned after
+    	 ArrayList<String> tempDeck = new ArrayList<String>();
+    	 String[] shuffled = new String[25];
+    	 for ( String str: terrainTypes) {   // cant use collections shuffle - 1.so we convert Array to ArrayList
+    		
+    	       tempDeck.add(str);
+    	 }
+    	 
+    	 Collections.shuffle(tempDeck);    //2. Now shuffle can be used
+    	 
+    	 for (int i = 0; i<25; i++) { 
+    			 
+    		shuffled[i] = tempDeck.get(i);
+    			 
+    		 }
+    	 
+    	 		return shuffled;
+    	 }
+    	 
      
      
 		
 }
-
