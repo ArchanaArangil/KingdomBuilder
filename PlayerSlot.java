@@ -11,6 +11,7 @@ public class PlayerSlot {
 	private Settlement temp1;
 	private Settlement temp2;
 	private Settlement temp3;
+	private int terrainCardIndex; // will go from 0-24, as we rotate player turns, this value will increment; The number will be used in 
 	public int count = 0;
 
 	
@@ -102,5 +103,23 @@ public class PlayerSlot {
 	public int getCount() {
 		return count;
 	}
+	
+
+	public String getTerrainCardType() {   // this method will call incrementTerrainCardIndex 
+		
+		TerrainCards tc = new TerrainCards();
+		String[] terraindeck = tc.getTerrainCardDeck();
+		
+		return terraindeck[terrainCardIndex]; 
+		
+	}
+	
+	public void incrementTerrainCardIndex() {
+		if (terrainCardIndex < 25) {
+			terrainCardIndex++;
+		}
+	}
+	
+	
 	
 }
