@@ -39,9 +39,9 @@ public class TerrainCards {
     	 return image;
      }
      
-     public String[] getTerrainCardDeck(String[] shuffledArray ) {
+     public String[] getTerrainCardDeck()  {
 		
-    	 			return shuffledArray;
+    	 			return terrainDeck;
 		 // Can use in the Player Class, to deal with everything manually from there
     	 
      }
