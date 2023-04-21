@@ -110,8 +110,9 @@ public class PlayerSlot {
 		TerrainCards tc = new TerrainCards();
 		String[] terraindeck = tc.getTerrainCardDeck();
 		
-	    incrementTerrainCardIndex();
-		return terraindeck[terrainCardIndex]; 
+		int tempTerrainCardIndex = terrainCardIndex;
+	        incrementTerrainCardIndex();
+		return terraindeck[tempTerrainCardIndex]; 
 		
 	}
 	
