@@ -20,6 +20,8 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	private static ObjectiveCard[] objCards;
 	private ArrayList<ObjectiveCard> objCardsChosen = new ArrayList<ObjectiveCard>();
 	private ArrayList<Integer> boardsPainted = new ArrayList<Integer>();
+	//private KBNode[][] hexes;
+	private ArrayList <Polygon> hexCoords = new ArrayList <Polygon>();
 
 
 	private static BufferedImage  beigeSettlement, blueSettlement, blackSettlement, orangeSettlement;
@@ -89,6 +91,7 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	} catch(Exception e) {System.out.println("Can't read objective cards");}
 	endTurnButton = new Button(endTurnButtonDisabled, endTurnButtonEnabled);
 	
+	playerTurn = 0;
 	board = new Board();
 	board.choosePieces();
 	board.buildGraph2();
@@ -139,6 +142,8 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 				
 				
 				board.bigBoard[i][j].setHex(new Polygon (x, y, 6));
+				//hexCoords.add(new Polygon(x, y, 6 ));
+				//System.out.println((hexes.get(i).getXCoords())[0] + " " + (hexes.get(i).getYCoords())[0]);
 			}
 			
 		}
@@ -239,15 +244,22 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
             endTurnButton.setEnabled(false);
             turnOver = true;
             continueClicked = true;
-
-            
+            playerTurn++;
+            if(playerTurn > 3)
+            	playerTurn = 0;
+            turnOver = false;
+            endTurnButton.setEnabled(true);
         }
         
         for(int i = 0; i < board.bigBoard.length; i++) {
         	for(int j = 0; j< board.bigBoard[0].length; j++) {
 	        	if((board.bigBoard[i][j]).hex.contains(x, y)) {
-	        		//System.out.println("(" + x + ", " + y + ") " + board.bigBoard[i][j].getType());
-	        		(board.bigBoard[i][j]).setSettlement("Beige Settlement");
+	        		if(!(board.bigBoard[i][j].getType().equals("water"))&& !(board.bigBoard[i][j].getType().equals("castle"))&& !(board.bigBoard[i][j].getType().equals("mountain"))&&
+	        		!(board.bigBoard[i][j].getType().equals("tavern"))&&!(board.bigBoard[i][j].getType().equals("paddock"))&&!(board.bigBoard[i][j].getType().equals("oasis"))&&
+	        		!(board.bigBoard[i][j].getType().equals("oracle"))&&!(board.bigBoard[i][j].getType().equals("barn"))&&!(board.bigBoard[i][j].getType().equals("harbor"))&&!(board.bigBoard[i][j].getType().equals("tower"))) {
+	        			
+	        			(board.bigBoard[i][j]).setSettlement("Beige Settlement");
+	        		}
 	        	}
         	}
         }
