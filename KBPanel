@@ -250,15 +250,27 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
             turnOver = false;
             endTurnButton.setEnabled(true);
         }
-        
+        //set Settlement for each node 
         for(int i = 0; i < board.bigBoard.length; i++) {
         	for(int j = 0; j< board.bigBoard[0].length; j++) {
 	        	if((board.bigBoard[i][j]).hex.contains(x, y)) {
 	        		if(!(board.bigBoard[i][j].getType().equals("water"))&& !(board.bigBoard[i][j].getType().equals("castle"))&& !(board.bigBoard[i][j].getType().equals("mountain"))&&
 	        		!(board.bigBoard[i][j].getType().equals("tavern"))&&!(board.bigBoard[i][j].getType().equals("paddock"))&&!(board.bigBoard[i][j].getType().equals("oasis"))&&
 	        		!(board.bigBoard[i][j].getType().equals("oracle"))&&!(board.bigBoard[i][j].getType().equals("barn"))&&!(board.bigBoard[i][j].getType().equals("harbor"))&&!(board.bigBoard[i][j].getType().equals("tower"))) {
-	        			
-	        			(board.bigBoard[i][j]).setSettlement("Beige Settlement");
+	        			if(!(board.bigBoard[i][j].hasSettlement())) {
+		        			if(playerTurn==0) {
+		        				(board.bigBoard[i][j]).setSettlement("Orange Settlement");
+		        			}
+		        			if(playerTurn==1) {
+		        				(board.bigBoard[i][j]).setSettlement("Black Settlement");
+		        			}
+		        			if(playerTurn==2) {
+		        				(board.bigBoard[i][j]).setSettlement("Blue Settlement");
+		        			}
+		        			if(playerTurn==3) {
+		        				(board.bigBoard[i][j]).setSettlement("Beige Settlement");
+		        			}
+	        			}
 	        		}
 	        	}
         	}
