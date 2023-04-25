@@ -1,10 +1,12 @@
 import java.awt.*;
 public class KBNode {
-	private int[] x;
-	private int[] y;
+	 int[] x;
+	 int[] y;
 	Polygon hex;
 	private String settlementOccupying;
 	private String type;
+	
+	
 	
 	public KBNode (char t) {
 		char terrain = t;
@@ -15,7 +17,7 @@ public class KBNode {
 		else if (terrain == 'D')
 			type = "desert";
 		else if (terrain == 'F')
-			type = "flower field";
+			type = "flowerfield";
 		else if (terrain == 'O')
 			type = "forest";
 		else if (terrain == 'C')
@@ -52,6 +54,10 @@ public class KBNode {
 		return settlementOccupying;
 	}
 	
+	public String getType() {
+		return type;
+	}
+	
 	public void setSettlement(String s) {
 		settlementOccupying = s;
 	}
@@ -66,6 +72,10 @@ public class KBNode {
 	
 	public int[] getYCoords() {
 		return y;
+	}
+	
+	public String toString() {
+		return type + " ";
 	}
 
 	
