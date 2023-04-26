@@ -24,6 +24,9 @@ public class Settlement {
             public static final int BORDER_WIDTH = 5;
 
             private double sizeFactor = 1;
+            
+
+            private boolean hasMoved = false;      
             /* 0: Orange Settlement
             * 1: Black Settlement
             * 2: Blue Settlement
@@ -131,8 +134,14 @@ public class Settlement {
 
             public String toString() {
 
-                        return settlementIndex + " " + highlighted;
-
+                        if(settlementIndex == 0) {
+                        	return "OrangeSettlement";
+                        }else if(settlementIndex == 1) {
+                        	return "BlackSettlement";
+                        }else if (settlementIndex == 2) {
+                        	return "BlueSettlement";
+                        }
+                        return "BeigeSettlement";
             }         
-
 }
+
