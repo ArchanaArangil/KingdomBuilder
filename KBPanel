@@ -103,7 +103,9 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 
 	endTurnButton.setHeight(70);
 
-	endTurnButton.setEnabled(true);
+	endTurnButton.setEnabled(false);
+	
+	
 	
 	pickObjCards();
 	repaint();
@@ -194,11 +196,11 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	for(int i = 0; i < 20; i++) {
 		for(int j = 0; j < 20; j++) {
 			g.drawPolygon((board.bigBoard[i][j]).getXCoords(), (board.bigBoard[i][j]).getYCoords(), 6);
-			System.out.print("[");
+			/*System.out.print("[");
 			for(int r = 0; r < 6; r++) {
 				System.out.print(board.bigBoard[i][j].x[r] + ", ");
-			}	
-			System.out.println("]" );
+			}/*/	
+			//System.out.println("]" );
 			if((board.bigBoard[i][j]).getSettlement() != null) {
 				if((board.bigBoard[i][j]).getSettlement().equals("Beige Settlement"))
 					g.drawImage(beigeSettlement,(board.bigBoard[i][j]).getXCoords()[0]+2, (board.bigBoard[i][j]).getYCoords()[0] - 2, 30, 30, null);
@@ -215,6 +217,109 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	
 	paintEndTurnButton(g);
 
+	}
+	int counterPlayerOne = playerOne.getPlayerClickCounter();
+	int counterPlayerTwo = playerOne.getPlayerClickCounter();
+	int counterPlayerThree = playerOne.getPlayerClickCounter();
+	int counterPlayerFour = playerOne.getPlayerClickCounter();
+	int threeOnly = 0;
+	
+	public void setNodeToBoard(int x, int y) {
+		
+
+		 for(int i = 0; i < board.bigBoard.length; i++) {
+	        	for(int j = 0; j< board.bigBoard[0].length; j++) {
+		        	if((board.bigBoard[i][j]).hex.contains(x, y)) {
+		        		if(!(board.bigBoard[i][j].getType().equals("water"))&& !(board.bigBoard[i][j].getType().equals("castle"))&& !(board.bigBoard[i][j].getType().equals("mountain"))&&
+		        		!(board.bigBoard[i][j].getType().equals("tavern"))&&!(board.bigBoard[i][j].getType().equals("paddock"))&&!(board.bigBoard[i][j].getType().equals("oasis"))&&
+		        		!(board.bigBoard[i][j].getType().equals("oracle"))&&!(board.bigBoard[i][j].getType().equals("barn"))&&!(board.bigBoard[i][j].getType().equals("harbor"))&&!(board.bigBoard[i][j].getType().equals("tower"))) {
+		        			if(!(board.bigBoard[i][j].hasSettlement())) {
+			        			if(playerTurn==0 && turnOver == false) {
+			        				(board.bigBoard[i][j]).setSettlement("Orange Settlement");
+			        				System.out.println("PlayerOne counter " + counterPlayerOne + "");
+			        				
+			        				counterPlayerOne++;
+			        				if(threeOnly < 2) {
+			        					playerOne.removeSettlement();
+
+				        				if(counterPlayerOne < 2) {
+				        					endTurnButton.setEnabled(false);
+				        					
+				        				}else if(counterPlayerOne > 2){
+				        					endTurnButton.setEnabled(true);
+				        					counterPlayerOne = 0;
+				        					turnOver = true;
+				        					//playerTurn++;
+				        					
+				        				}
+				        				
+			        				}
+
+			        				
+			        			}
+			        			if(playerTurn==1 && turnOver == false) {
+			        				(board.bigBoard[i][j]).setSettlement("Black Settlement");
+			        				System.out.println("PlayerTwo counter" + counterPlayerTwo + "");
+
+			        				counterPlayerTwo++;
+			        				playerTwo.removeSettlement();
+
+			        				
+			        				if(counterPlayerTwo < 2) {
+			        					endTurnButton.setEnabled(false);
+			        					
+			        				}else if(counterPlayerTwo > 2){
+			        					endTurnButton.setEnabled(true);
+			        					counterPlayerTwo = 0;
+			        					turnOver = true;
+			        					//playerTurn++;
+
+
+			        			
+			        				}
+			        						        			}
+			        			if(playerTurn==2 && turnOver == false) {
+			        				(board.bigBoard[i][j]).setSettlement("Blue Settlement");
+			        				counterPlayerThree++;
+			        				playerThree.removeSettlement();
+
+			        				
+			        				if(counterPlayerThree < 2) {
+			        					endTurnButton.setEnabled(false);
+			        					
+			        				}else if(counterPlayerThree > 2){
+			        					endTurnButton.setEnabled(true);
+			        					counterPlayerThree = 0;
+			        					turnOver = true;
+			        					//playerTurn++;
+			        			
+			        				}
+
+			        			}
+			        			if(playerTurn==3 && turnOver == false) {
+			        				(board.bigBoard[i][j]).setSettlement("Beige Settlement");
+			        				counterPlayerFour++;
+			        				playerFour.removeSettlement();
+
+			        				
+			        				if(counterPlayerFour < 2) {
+			        					endTurnButton.setEnabled(false);
+			        					
+			        				}else if(counterPlayerFour > 2){
+			        					endTurnButton.setEnabled(true);
+			        					counterPlayerFour = 0;
+			        					turnOver = true;
+			        					//playerTurn = 0;
+			        			
+			        				}
+
+			  
+			        			}
+		        			}
+		        		}
+		        	}
+	        	}
+	        }
 	}
 
 	public void paintEndTurnButton(Graphics g) {
@@ -238,47 +343,41 @@ public class KBPanel extends JPanel implements MouseMotionListener, MouseListene
 	public void mouseDragged(MouseEvent e) { }
 	public void mouseMoved(MouseEvent e) {}
 	
+	
 	public void clickButton(int x, int y) {
+    	setNodeToBoard(x,y);
+
+		
 		
         if (endTurnButton.isClicked(x, y)) {
             endTurnButton.setEnabled(false);
             turnOver = true;
             continueClicked = true;
             playerTurn++;
-            if(playerTurn > 3)
+
+            /*if(threeOnly < 3) {
+            	setNodeToBoard(x,y);
+            	threeOnly++;
+            }else {
+            	playerTurn++;
+            	
+            }*/
+            //keeps track of which player is playing
+            //only allows players to place three at a time
+            
+            System.out.println("Print Player Turns: " + playerTurn);
+            if(playerTurn > 3) 
             	playerTurn = 0;
-            turnOver = false;
-            endTurnButton.setEnabled(true);
+            	turnOver = false;
+            	endTurnButton.setEnabled(false);
+            	
+            
         }
         //set Settlement for each node 
-        for(int i = 0; i < board.bigBoard.length; i++) {
-        	for(int j = 0; j< board.bigBoard[0].length; j++) {
-	        	if((board.bigBoard[i][j]).hex.contains(x, y)) {
-	        		if(!(board.bigBoard[i][j].getType().equals("water"))&& !(board.bigBoard[i][j].getType().equals("castle"))&& !(board.bigBoard[i][j].getType().equals("mountain"))&&
-	        		!(board.bigBoard[i][j].getType().equals("tavern"))&&!(board.bigBoard[i][j].getType().equals("paddock"))&&!(board.bigBoard[i][j].getType().equals("oasis"))&&
-	        		!(board.bigBoard[i][j].getType().equals("oracle"))&&!(board.bigBoard[i][j].getType().equals("barn"))&&!(board.bigBoard[i][j].getType().equals("harbor"))&&!(board.bigBoard[i][j].getType().equals("tower"))) {
-	        			if(!(board.bigBoard[i][j].hasSettlement())) {
-		        			if(playerTurn==0) {
-		        				(board.bigBoard[i][j]).setSettlement("Orange Settlement");
-		        			}
-		        			if(playerTurn==1) {
-		        				(board.bigBoard[i][j]).setSettlement("Black Settlement");
-		        			}
-		        			if(playerTurn==2) {
-		        				(board.bigBoard[i][j]).setSettlement("Blue Settlement");
-		        			}
-		        			if(playerTurn==3) {
-		        				(board.bigBoard[i][j]).setSettlement("Beige Settlement");
-		        			}
-	        			}
-	        		}
-	        	}
-        	}
-        }
+        //setNodeToBoard(x,y);
+       
         paintEndTurnButton(getGraphics());
         repaint();
         
     }
-	
-	
 }
