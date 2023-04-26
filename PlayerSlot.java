@@ -11,8 +11,12 @@ public class PlayerSlot {
 	private Settlement temp1;
 	private Settlement temp2;
 	private Settlement temp3;
-	private int terrainCardIndex; // will go from 0-24, as we rotate player turns, this value will increment; The number will be used in 
 	public int count = 0;
+	Iterator iter = settlementList.iterator();
+	private Settlement removedSettlements;
+	int playerClickCounter = 0;
+	
+
 
 	
 
@@ -40,88 +44,131 @@ public class PlayerSlot {
 		
 	}
 	
+	public Settlement removeSettlement(int index) {
+		
+			removedSettlements = settlementList.remove(index);
+			count--;
+			return removedSettlements;
+			
+		
+	}
+	
+	public int getPlayerClickCounter() {
+		return playerClickCounter;
+	}
+	
+
+	public void removeSettlement() {
+		
+			removedSettlements = settlementList.remove(0);
+			
+	
+	}
+	
+	
+	
+
+	
 	
 	public void display(Graphics g) {
 		
 		if(settlementList.size() > 0) {
+			
+		
 			temp1 = settlementList.get(0);
 			temp2 = settlementList.get(1);
 			temp3 = settlementList.get(2);
 		
-
 		if(playerNum == 0) {
-			temp1.setX(56);
-			temp1.setY(233);
+			settlementList.get(0).setX(56);
+			settlementList.get(0).setY(233);
 			
-			temp2.setX(108);
-			temp2.setY(233);
+			settlementList.get(1).setX(108);
+			settlementList.get(1).setY(233);
 			
-			temp3.setX(160);
-			temp3.setY(233);;
+			
+			settlementList.get(2).setX(160);
+			settlementList.get(2).setY(233);
 
 		}else if(playerNum == 1) {
-			temp1.setX(56);
+			/*temp1.setX(56);
 			temp1.setY(719);
 			
 			temp2.setX(108);
 			temp2.setY(719);
 			
 			temp3.setX(160);
-			temp3.setY(719);;
+			temp3.setY(719);;*/
+			
+			settlementList.get(0).setX(56);
+			settlementList.get(0).setY(719);
+			
+			settlementList.get(1).setX(108);
+			settlementList.get(1).setY(719);
+			
+			
+			settlementList.get(2).setX(160);
+			settlementList.get(2).setY(719);
 
 		}else if(playerNum == 2) {
-			temp1.setX(1400);
-			temp1.setY(233);
+			//temp1.setX(1400);
+			//temp1.setY(233);
 			
-			temp2.setX(1454);
+			/*temp2.setX(1454);
 			temp2.setY(233);
 			
 			temp3.setX(1511);
-			temp3.setY(233);;
+			temp3.setY(233);;*/
+			
+			settlementList.get(0).setX(1400);
+			settlementList.get(0).setY(233);
+			
+			settlementList.get(1).setX(1454);
+			settlementList.get(1).setY(233);
+			
+			
+			settlementList.get(2).setX(1511);
+			settlementList.get(2).setY(233);
 			
 		}else if(playerNum == 3) {
-			temp1.setX(1400);
-			temp1.setY(721);
+			//temp1.setX(1400);
+			//temp1.setY(721);
 			
-			temp2.setX(1454);
-			temp2.setY(721);
+			//temp2.setX(1454);
+			//temp2.setY(721);
 			
-			temp3.setX(1511);
-			temp3.setY(721);;
+			//temp3.setX(1511);
+			//temp3.setY(721);;
+			
+			settlementList.get(0).setX(1400);
+			settlementList.get(0).setY(721);
+			
+			settlementList.get(1).setX(1454);
+			settlementList.get(1).setY(721);
+			
+			
+			settlementList.get(2).setX(1511);
+			settlementList.get(2).setY(721);
 		}
 		
-		temp1.displaySettlement(g);
-		temp2.displaySettlement(g);
-		temp3.displaySettlement(g);
+		settlementList.get(0).displaySettlement(g);
+		settlementList.get(1).displaySettlement(g);
+		settlementList.get(2).displaySettlement(g);
 		
 		}
+		
 		
 		
 
 	}
+	
+	public Settlement getSettlement() {
+		return temp1;
+	}
+	
 	
 	public int getCount() {
 		return count;
 	}
-	
-
-	public String getTerrainCardType() {   // this method will call incrementTerrainCardIndex 
-		
-		TerrainCards tc = new TerrainCards();
-		String[] terraindeck = tc.getTerrainCardDeck();
-		
-		int tempTerrainCardIndex = terrainCardIndex;
-	        incrementTerrainCardIndex();
-		return terraindeck[tempTerrainCardIndex]; 
-		
-	}
-	
-	public void incrementTerrainCardIndex() {
-		if (terrainCardIndex < 25) {
-			terrainCardIndex++;
-		}
-	}
-	
-	
 	
 }
