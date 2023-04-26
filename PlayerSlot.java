@@ -61,6 +61,7 @@ public class PlayerSlot {
 	public void removeSettlement() {
 		
 			removedSettlements = settlementList.remove(0);
+			count--;
 			
 	
 	}
